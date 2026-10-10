@@ -1,11 +1,10 @@
 package de.streuland.auth;
 
+import de.streuland.storage.InvitationDatabaseMigration;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.Instant;
 import java.util.UUID;
 import java.nio.file.Path;
@@ -25,21 +24,11 @@ public class SqliteUserGateway implements UserGateway {
     }
 
     private void initialize() {
-        try (Connection c = connection(); Statement st = c.createStatement()) {
-            st.execute("PRAGMA foreign_keys = ON");
-            st.execute("CREATE TABLE IF NOT EXISTS users (" +
-                    "id TEXT PRIMARY KEY, " +
-                    "username TEXT UNIQUE, " +
-                    "email TEXT UNIQUE, " +
-                    "password_hash TEXT, " +
-                    "password_salt TEXT, " +
-                    "created_at TEXT, " +
-                    "invite_code_id TEXT, " +
-                    "server_id TEXT" +
-                    ")");
+        try (Connection c = connection()) {
+            InvitationDatabaseMigration.migrate(c);
         } catch (SQLException e) {
             throw new IllegalStateException("Failed to initialize users schema", e);
-        };
+        }
     }
 
     @Override

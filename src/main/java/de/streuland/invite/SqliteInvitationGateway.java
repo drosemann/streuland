@@ -2,6 +2,7 @@ package de.streuland.invite;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import de.streuland.storage.InvitationDatabaseMigration;
 import java.io.File;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
@@ -11,7 +12,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.security.SecureRandom;
@@ -38,21 +38,8 @@ public class SqliteInvitationGateway implements InvitationGateway {
     }
 
     private void initialize() {
-        try (Connection c = connection(); Statement st = c.createStatement()) {
-            st.execute("PRAGMA foreign_keys = ON");
-            st.execute("CREATE TABLE IF NOT EXISTS invitations (" +
-                    "id TEXT PRIMARY KEY, " +
-                    "code TEXT UNIQUE, " +
-                    "issuer_user_id TEXT, " +
-                    "created_at TEXT, " +
-                    "expires_at TEXT, " +
-                    "max_uses INTEGER, " +
-                    "uses INTEGER DEFAULT 0, " +
-                    "is_revoked BOOLEAN, " +
-                    "allowed_roles TEXT, " +
-                    "server_id TEXT, " +
-                    "target_server TEXT" +
-                    ")");
+        try (Connection c = connection()) {
+            InvitationDatabaseMigration.migrate(c);
         } catch (SQLException e) {
             throw new IllegalStateException("Failed to initialize invitations schema", e);
         }

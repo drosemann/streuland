@@ -60,6 +60,7 @@ import de.streuland.rules.ExampleRules;
 import de.streuland.rules.RuleEngine;
 import de.streuland.rules.listener.RuleListener;
 import de.streuland.schematic.SchematicLoader;
+import de.streuland.storage.InvitationDatabaseMigration;
 import de.streuland.storage.SqlitePlotStorage;
 import de.streuland.storage.YamlPlotStorage;
 import de.streuland.transaction.TransactionManager;
@@ -138,6 +139,12 @@ public class StreulandPlugin extends JavaPlugin {
         saveDefaultConfig();
 
         try {
+            if (InvitationDatabaseMigration.migrate(getDataFolder().toPath().resolve("invite.sqlite"))) {
+                getLogger().warning("=================================================");
+                getLogger().warning("WARNUNG: Deine invite.sqlite war veraltet!");
+                getLogger().warning("Die Datenbank wurde automatisch migriert.");
+                getLogger().warning("=================================================");
+            }
             features = FeatureToggles.fromConfig(getConfig());
             validateStartupConfiguration();
             initializeStorageAdapter();

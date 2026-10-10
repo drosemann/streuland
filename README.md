@@ -18,6 +18,7 @@ Das volle Java-Projekt mit Maven, gebaut für Paper `1.16.5`.
 - **District & Nachbarschaften** – Progression statt einfach nur Claims
 - **Plot Upgrades, Markt & Freigaben** – Wirtschaft + Approval Workflows
 - **Speicherung** – YAML + SQLite
+- **SQLite-Schema** – `invite.sqlite` wird beim Serverstart versioniert und bei Bedarf automatisch migriert
 - **Optionales Dashboard** – REST/WebSocket Assets
 - **Clan System** – Quota, Diplomatie, Chunk Wars & Belohnungen
 - **Marktstände** – `/markt`
