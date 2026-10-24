@@ -11,6 +11,13 @@
 
   <name>Streuland Plot Plugin</name>
   <description>Plotsystem für Paper 1.16.5 mit Vanilla-Weltgenerierung</description>
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>https://opensource.org/license/mit/</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
   <properties>
     <maven.compiler.source>17</maven.compiler.source>

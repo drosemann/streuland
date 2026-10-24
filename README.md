@@ -110,7 +110,5 @@ Siehe [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Lizenz
 
-GNU GPLv3 – siehe [LICENSE](LICENSE).
-Das ist jetzt viel nahbarer – du erklärst nicht nur WAS es tut, sondern WARUM es existiert. Das zieht auf Spigot / GitHub viel mehr als eine trockene Feature-Liste.
-
-Willst du dass ich dir das noch auf `drosemann/streuland` als PR-fertige README formatiere und die `pom.xml` Beschreibung auch auf Deutsch angleiche?
+Für neue Releases ab dem 24.10.2026 gilt die MIT-Lizenz – siehe [LICENSE](LICENSE).
+Frühere Releases bleiben unter GNU GPLv3.
